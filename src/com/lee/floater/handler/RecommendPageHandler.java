@@ -25,7 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
+/**lllllllll
  * 集中处理首页_推荐页面中的事务
  */
 public class RecommendPageHandler {
