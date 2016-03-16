@@ -26,7 +26,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
+<<<<<<< master
  * 闆嗕腑澶勭悊棣栭〉_鎺ㄨ崘椤甸潰涓殑浜嬪姟
+=======
+ * 集中处理首页_推荐页面中的事务
+>>>>>>> 8fec199 li
  */
 public class RecommendPageHandler {
 	
