@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e6e6e6" >
+
+    <!-- 创建底部评论输入框 -->
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/nav_bottom_frame_background" >
+
+        <EditText
+            android:id="@+id/comment_edittext_frame"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:background="@null"
+            android:cursorVisible="true"
+            android:hint="点此输入评论"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:textColor="#333333"
+            android:textColorHint="#848484"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="15sp"
+            android:typeface="sans" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="16dp"
+        android:text="发布"
+        android:textColor="#333333"
+        android:textSize="17sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="216dp"
+        android:text="中国好声音"
+        android:textColor="#333333"
+        android:textSize="17sp" />
+
+</RelativeLayout>
