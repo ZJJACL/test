@@ -25,33 +25,33 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**lllllllll
- * ¼¯ÖĞ´¦ÀíÊ×Ò³_ÍÆ¼öÒ³ÃæÖĞµÄÊÂÎñ
+/**
+ * é›†ä¸­å¤„ç†é¦–é¡µ_æ¨èé¡µé¢ä¸­çš„äº‹åŠ¡
  */
 public class RecommendPageHandler {
 	
-	Context context;//½«Main´«½øÀ´
-	public View find_recommend_view; //ÍÆ¼öÒ³ÃæµÄÖ÷View
-	public View find_recommend_page_head;//ÍÆ¼öÒ³ÃæµÄÍ·²¿View(Banner/10ÌõÍÆ¼ö»°Ìâ)
+	Context context;//å°†Mainä¼ è¿›æ¥
+	public View find_recommend_view; //æ¨èé¡µé¢çš„ä¸»View
+	public View find_recommend_page_head;//æ¨èé¡µé¢çš„å¤´éƒ¨View(Banner/10æ¡æ¨èè¯é¢˜)
 	
-	public ViewPager bannerViewPager; // BannerµÄViewPager
-	public RecyclerView my_follow_topic_recyclerView;//ÎÒ¹Ø×¢µÄ»°ÌâµÄRecyclerView
+	public ViewPager bannerViewPager; // Bannerçš„ViewPager
+	public RecyclerView my_follow_topic_recyclerView;//æˆ‘å…³æ³¨çš„è¯é¢˜çš„RecyclerView
 	
-    //ÎÒ¹Ø×¢µÄ»°ÌâÊı¾İList
+    //æˆ‘å…³æ³¨çš„è¯é¢˜æ•°æ®List
     public ArrayList<Topic_Item> my_follow_topic_items = new ArrayList<Topic_Item>();
 
-    //µ×²¿Ë¢ĞÂViewË÷Òı
+    //åº•éƒ¨åˆ·æ–°Viewç´¢å¼•
     public View refresh_footer_view;
     
-    //ÏÂÀ­Ë¢ĞÂÌõµÄË÷Òı
+    //ä¸‹æ‹‰åˆ·æ–°æ¡çš„ç´¢å¼•
     SwipeRefreshLayout refresh_bar_for_recommend_page;
     
-    LinearLayoutManager linearLayoutManager;//¹Ø×¢µÄ»°ÌâµÄRecyclerViewµÄ²¼¾Ö
+    LinearLayoutManager linearLayoutManager;//å…³æ³¨çš„è¯é¢˜çš„RecyclerViewçš„å¸ƒå±€
     
-	TopicListAdapter adapter; //¹Ø×¢µÄ»°ÌâµÄRecyclerViewµÄAdapter
+	TopicListAdapter adapter; //å…³æ³¨çš„è¯é¢˜çš„RecyclerViewçš„Adapter
     
 	/**
-	 * ¹¹Ôì·½·¨ÖĞ½«ÍÆ¼öÒ³ÃæViewºÍMain´«½øÀ´
+	 * æ„é€ æ–¹æ³•ä¸­å°†æ¨èé¡µé¢Viewå’ŒMainä¼ è¿›æ¥
 	 */
 	public RecommendPageHandler(View find_recommend_view, Context context){
 		this.find_recommend_view = find_recommend_view ;
@@ -60,67 +60,67 @@ public class RecommendPageHandler {
 	}
 	
 	/**
-	 * ¼ÓÔØÍÆ¼öÒ³ÖĞµÄËùÓĞµÄViewË÷Òı
+	 * åŠ è½½æ¨èé¡µä¸­çš„æ‰€æœ‰çš„Viewç´¢å¼•
 	 */
 	public void findAllViewById(){
 		
 		LayoutInflater inflater = LayoutInflater.from(context);
 		
-		//½«ÍÆ¼öÒ³ÃæÖĞµÄÍ·²¿View×°ÔØÎªView
+		//å°†æ¨èé¡µé¢ä¸­çš„å¤´éƒ¨Viewè£…è½½ä¸ºView
         find_recommend_page_head = 
         		inflater.inflate(R.layout.find_recommend_page_head,null);
         
-        //¼ÓÔØBannerµÄViewPage
+        //åŠ è½½Bannerçš„ViewPage
         bannerViewPager=
         		(ViewPager)find_recommend_page_head.findViewById(R.id.banner_view_pager);
         
-     	//¼ÓÔØÎªÎÒ¹Ø×¢µÄ»°Ìâ±àĞ´µÄRecyclerView
+     	//åŠ è½½ä¸ºæˆ‘å…³æ³¨çš„è¯é¢˜ç¼–å†™çš„RecyclerView
         my_follow_topic_recyclerView =
         		(RecyclerView)find_recommend_view.findViewById(R.id.my_follow_topic_recyclerview);
         
-        //½«ÁĞ±íÎ²²¿µÄ¼ÓÔØ¸ü¶àµÄXML×°ÔØÎªView
+        //å°†åˆ—è¡¨å°¾éƒ¨çš„åŠ è½½æ›´å¤šçš„XMLè£…è½½ä¸ºView
         refresh_footer_view = inflater.inflate(R.layout.refresh_footer_view,null);
         
-       //¼ÓÔØÍÆ¼öÒ³ÃæµÄË¢ĞÂÌõSwipeRefreshLayout
+       //åŠ è½½æ¨èé¡µé¢çš„åˆ·æ–°æ¡SwipeRefreshLayout
         refresh_bar_for_recommend_page = 
         		(SwipeRefreshLayout)find_recommend_view.findViewById(R.id.refresh_bar_for_recommend_page);  
-        //ÎªÕâ¸öË¢ĞÂÌõÌí¼Ó¹ö¶¯ÑÕÉ«
+        //ä¸ºè¿™ä¸ªåˆ·æ–°æ¡æ·»åŠ æ»šåŠ¨é¢œè‰²
         refresh_bar_for_recommend_page.setColorSchemeResources(R.color.color1, R.color.color2,R.color.color3, R.color.color4);
-        //ÎªÒ³ÃæÖĞµÄË¢ĞÂ¿Ø¼şÌí¼Ó¼àÌıÆ÷
+        //ä¸ºé¡µé¢ä¸­çš„åˆ·æ–°æ§ä»¶æ·»åŠ ç›‘å¬å™¨
         refresh_bar_for_recommend_page.setOnRefreshListener(new RecommendPageRefreshListener());
-        //ÎªÁËÊµÏÖÏÂÀ­Ë¢ĞÂ£¬ÕâÀïĞèÒªÎªÒ³ÃæµÄRecyclerViewÌí¼Ó¹ö¶¯ÊÂ¼ş¼àÌıÆ÷
+        //ä¸ºäº†å®ç°ä¸‹æ‹‰åˆ·æ–°ï¼Œè¿™é‡Œéœ€è¦ä¸ºé¡µé¢çš„RecyclerViewæ·»åŠ æ»šåŠ¨äº‹ä»¶ç›‘å¬å™¨
         my_follow_topic_recyclerView.setOnScrollListener(new RecommendPageOnScrollListener());
 
 	}
 	
 	/**
-	 * ÍÆ¼öÒ³ÃæÖĞµÄÊı¾İ¼ÓÔØ¡¢ÏÔÊ¾¡¢Ë¢ĞÂµÈËùÓĞÊÂÎñµÄÖĞ¼ÌÆ÷
+	 * æ¨èé¡µé¢ä¸­çš„æ•°æ®åŠ è½½ã€æ˜¾ç¤ºã€åˆ·æ–°ç­‰æ‰€æœ‰äº‹åŠ¡çš„ä¸­ç»§å™¨
 	 */
 	public void Handle (){
 		
-		//Íê³ÉBannerµÄViewPagerµÄ×°ÔØºÍÏÔÊ¾
+		//å®ŒæˆBannerçš„ViewPagerçš„è£…è½½å’Œæ˜¾ç¤º
         setBannerViewPager();
         
-      //¼ÓÔØÃ¿ÈÕ»°ÌâÍÆ¼öÖĞµÄÊı¾İ
+      //åŠ è½½æ¯æ—¥è¯é¢˜æ¨èä¸­çš„æ•°æ®
         loadEverydayTopicItems();
         
-      //¼ÓÔØÎÒ¹Ø×¢µÄ»°ÌâÖĞµÄÊı¾İ
+      //åŠ è½½æˆ‘å…³æ³¨çš„è¯é¢˜ä¸­çš„æ•°æ®
         loadMyFollowTopicItems();
         
-        //½«ÎÒ¹Ø×¢µÄ»°ÌâÖĞµÄÊı¾İ×°ÔØµ½RecycleViewÖĞ
+        //å°†æˆ‘å…³æ³¨çš„è¯é¢˜ä¸­çš„æ•°æ®è£…è½½åˆ°RecycleViewä¸­
         setMyFollowTopicRecyclerView();
         
 	}
 	
 	/**
-	 * Íê³ÉBannerViewPagerµÄ×°ÔØ,²¢ÎªÆäÉè¶¨¼àÌıÆ÷
+	 * å®ŒæˆBannerViewPagerçš„è£…è½½,å¹¶ä¸ºå…¶è®¾å®šç›‘å¬å™¨
 	 */
 	public void setBannerViewPager(){
 		List<View> list = new ArrayList<View>() ;
 		LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,  
 				                                  LinearLayout.LayoutParams.WRAP_CONTENT); 
 		
-		//Ô¤ÉèÎª×°ÔØ3ÕÅ»ÃµÆBanner£¬Êµ¼ÊÓ¦¸Ãµ¥¶À¿ª±ÙÒ»ÌõÏß³Ì´Ó·şÎñÆ÷µ÷È¡Í¼Æ¬
+		//é¢„è®¾ä¸ºè£…è½½3å¼ å¹»ç¯Bannerï¼Œå®é™…åº”è¯¥å•ç‹¬å¼€è¾Ÿä¸€æ¡çº¿ç¨‹ä»æœåŠ¡å™¨è°ƒå–å›¾ç‰‡
 		for(int i =0 ; i<3 ; i ++){
              ImageView imageView = new ImageView(context) ;
              imageView.setLayoutParams(mParams);
@@ -129,13 +129,13 @@ public class RecommendPageHandler {
              list.add(imageView);
          }
 		
-		//ÎªBannerViewPager´´½¨ÊÊÅäÆ÷
+		//ä¸ºBannerViewPageråˆ›å»ºé€‚é…å™¨
 		ScreenPagerAdapter sPagerAdapter = new ScreenPagerAdapter(list);
 
-		//ÎªViewPagerÉèÖÃAdapter
+		//ä¸ºViewPagerè®¾ç½®Adapter
 		bannerViewPager.setAdapter(sPagerAdapter);
 		
-		//ÎªBannerViewPagerÉè¶¨¼àÌıÆ÷£¬ÒÔ¿ØÖÆBanner_pickerµÄ¹ö¶¯
+		//ä¸ºBannerViewPagerè®¾å®šç›‘å¬å™¨ï¼Œä»¥æ§åˆ¶Banner_pickerçš„æ»šåŠ¨
 		bannerViewPager.setOnPageChangeListener(new BannerListener(
 				(RotateImageView)find_recommend_page_head.findViewById(R.id.banner_picker),
 				(TextView)find_recommend_page_head.findViewById(R.id.banner_number)
@@ -143,11 +143,11 @@ public class RecommendPageHandler {
 	}
 	
 	/**
-	 * ´Ó·şÎñÆ÷¶Ëµ÷È¡Ã¿ÈÕÍÆ¼öµÄ»°Ìâ
-	 * ÔÚÊµ¼ÊÔËĞĞµÄÊ±ºòÓ¦¸Ãµ¥¶À¿ª±ÙÒ»ÌõÏß³Ì½øĞĞ¼ÓÔØ
+	 * ä»æœåŠ¡å™¨ç«¯è°ƒå–æ¯æ—¥æ¨èçš„è¯é¢˜
+	 * åœ¨å®é™…è¿è¡Œçš„æ—¶å€™åº”è¯¥å•ç‹¬å¼€è¾Ÿä¸€æ¡çº¿ç¨‹è¿›è¡ŒåŠ è½½
 	 */
 	public void loadEverydayTopicItems(){
-		//Ã¿ÈÕÍÆ¼ö10Ìõ
+		//æ¯æ—¥æ¨è10æ¡
 		RelativeLayout Item_1 = 
 				(RelativeLayout)find_recommend_page_head.findViewById(R.id.recommend_topic_1);
 		RelativeLayout Item_2 = 
@@ -182,22 +182,22 @@ public class RecommendPageHandler {
 		Item_List.add(Item_10);
 		for(int i=0 ; i<10;i++){
 			((ImageView)(Item_List.get(i).getChildAt(0))).setImageResource(R.drawable.list_topic_icon);
-			((TextView)(Item_List.get(i).getChildAt(1))).setText("ÎÒÎªÊÒÓÑÀ´Õ÷»é");
-			((TextView)(Item_List.get(i).getChildAt(2))).setText("ÒÑÖÆÔì208¸ö¿¨Æ¬");
+			((TextView)(Item_List.get(i).getChildAt(1))).setText("æˆ‘ä¸ºå®¤å‹æ¥å¾å©š");
+			((TextView)(Item_List.get(i).getChildAt(2))).setText("å·²åˆ¶é€ 208ä¸ªå¡ç‰‡");
 			((ImageView)(Item_List.get(i).getChildAt(3))).setImageResource(R.drawable.list_topic_category_video);
 		}
 	}
 	
 	/**
-	 * ´Ó·şÎñÆ÷¶Ëµ÷È¡ÎÒ¹Ø×¢µÄ»°Ìâ£¬×°ÔØµ½my_follow_topic_itemsÕâ¸öList<Topic_Item>ÖĞ
-	 * ÔÚÊµ¼ÊÔËĞĞµÄÊ±ºòÓ¦¸Ãµ¥¶À¿ª±ÙÒ»ÌõÏß³Ì½øĞĞ¼ÓÔØ
+	 * ä»æœåŠ¡å™¨ç«¯è°ƒå–æˆ‘å…³æ³¨çš„è¯é¢˜ï¼Œè£…è½½åˆ°my_follow_topic_itemsè¿™ä¸ªList<Topic_Item>ä¸­
+	 * åœ¨å®é™…è¿è¡Œçš„æ—¶å€™åº”è¯¥å•ç‹¬å¼€è¾Ÿä¸€æ¡çº¿ç¨‹è¿›è¡ŒåŠ è½½
 	 */
 	public void loadMyFollowTopicItems(){
-		//Ô¤Éè¼ÓÔØ10Ìõ
+		//é¢„è®¾åŠ è½½10æ¡
 		for(int i=0 ; i<10; i++){
 			 Topic_Item item = new Topic_Item();
 		     item.setTopicIcon(R.drawable.list_topic_icon);
-		     item.setTopicTitle("Ğ£Ô°ÖĞÄÇĞ©×Ô´ø¼¼ÄÜµÄB");
+		     item.setTopicTitle("æ ¡å›­ä¸­é‚£äº›è‡ªå¸¦æŠ€èƒ½çš„B");
 		     item.setTopicContentNumber(1024);
 		     item.setTopicUpdateNumber(35);
 		     my_follow_topic_items.add(item);
@@ -205,50 +205,50 @@ public class RecommendPageHandler {
 	}
 	
 	/**
-	 * ½«ÎÒ¹Ø×¢µÄ»°ÌâÖĞµÄÊı¾İ×°ÔØµ½RecycleViewÖĞ£¬²¢Éè¶¨µã»÷ÊÂ¼şµÄ¼àÌıÆ÷
+	 * å°†æˆ‘å…³æ³¨çš„è¯é¢˜ä¸­çš„æ•°æ®è£…è½½åˆ°RecycleViewä¸­ï¼Œå¹¶è®¾å®šç‚¹å‡»äº‹ä»¶çš„ç›‘å¬å™¨
 	 */
 	public void setMyFollowTopicRecyclerView(){
 
-        //Ä¬ÈÏ¶¯»­Ğ§¹û
+        //é»˜è®¤åŠ¨ç”»æ•ˆæœ
 		my_follow_topic_recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //ÉèÖÃ²¼¾Ö¹ÜÀíÆ÷£¬µÚÈı¸ö²ÎÊıÎªÊÇ·ñÄæÏò²¼¾Ö
+        //è®¾ç½®å¸ƒå±€ç®¡ç†å™¨ï¼Œç¬¬ä¸‰ä¸ªå‚æ•°ä¸ºæ˜¯å¦é€†å‘å¸ƒå±€
 		linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
 		my_follow_topic_recyclerView.setLayoutManager(linearLayoutManager);
-        //¿ÉÒÔÌá¸ßĞ§ÂÊ
+        //å¯ä»¥æé«˜æ•ˆç‡
 		my_follow_topic_recyclerView.setHasFixedSize(true);
-		//ĞÂ½¨ÊÊÅäÆ÷
+		//æ–°å»ºé€‚é…å™¨
         adapter = new TopicListAdapter();
        
         adapter.addDatas(my_follow_topic_items);
-        //¼ÓÔØÍ·²¿
+        //åŠ è½½å¤´éƒ¨
         adapter.setHeaderView(find_recommend_page_head);
-        //¼ÓÔØÎ²²¿
+        //åŠ è½½å°¾éƒ¨
         adapter.setFooterView(refresh_footer_view);
         
-        //ÉèÖÃÊÊÅäÆ÷
+        //è®¾ç½®é€‚é…å™¨
         my_follow_topic_recyclerView.setAdapter(adapter);
-        //Òş²ØÈ«ÆÁµÄLoading
+        //éšè—å…¨å±çš„Loading
         RelativeLayout loadingPage =( RelativeLayout)find_recommend_view.findViewById(R.id.loading_start_for_recommend_page);
         loadingPage.setVisibility(View.GONE);
         
-        //ÉèÖÃ¼àÌıÆ÷,µ±»°ÌâÁĞ±íÖĞµÄÄ³Ò»Ïî±»µ¥»÷µÄÊ±ºò»Øµ÷
+        //è®¾ç½®ç›‘å¬å™¨,å½“è¯é¢˜åˆ—è¡¨ä¸­çš„æŸä¸€é¡¹è¢«å•å‡»çš„æ—¶å€™å›è°ƒ
         adapter.setOnItemClickListener(new TopicListItemListener(context));
     }
 	
 	  /**
-     * ÍÆ¼öÒ³ÃæÖĞµÄÏÂÀ­Ë¢ĞÂ¼àÌıÆ÷
+     * æ¨èé¡µé¢ä¸­çš„ä¸‹æ‹‰åˆ·æ–°ç›‘å¬å™¨
      */
     class RecommendPageRefreshListener implements OnRefreshListener{
 
     	@Override
     	public void onRefresh() {
     		
-    		//ÕâÀïÖ÷ÒªÊÇ¶Ô¹Ø×¢µÄ»°ÌâÁĞ±íµÄ¸üĞÂ
+    		//è¿™é‡Œä¸»è¦æ˜¯å¯¹å…³æ³¨çš„è¯é¢˜åˆ—è¡¨çš„æ›´æ–°
     		ArrayList<Topic_Item> newDatas = new ArrayList<Topic_Item>();
 			for(int i=0 ; i<5; i++){
 				 Topic_Item item = new Topic_Item();
 			     item.setTopicIcon(R.drawable.list_topic_icon);
-			     item.setTopicTitle("ÎÒ´ÓÀ´Ã»ÓĞËµ¹ıµÄÃØÃÜ");
+			     item.setTopicTitle("æˆ‘ä»æ¥æ²¡æœ‰è¯´è¿‡çš„ç§˜å¯†");
 			     item.setTopicContentNumber(389);
 			     item.setTopicUpdateNumber(8);
 			     newDatas.add(item);
@@ -262,7 +262,7 @@ public class RecommendPageHandler {
     
     
     /**
-     * ÍÆ¼öÒ³ÃæÖĞµÄ¼ÓÔØ¸ü¶àË¢ĞÂ¼àÌıÆ÷
+     * æ¨èé¡µé¢ä¸­çš„åŠ è½½æ›´å¤šåˆ·æ–°ç›‘å¬å™¨
      */
     class RecommendPageOnScrollListener extends RecyclerView.OnScrollListener{
 
@@ -275,15 +275,15 @@ public class RecommendPageHandler {
     		if (newState ==RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {  
 
     			TextView text = (TextView)refresh_footer_view.findViewById(R.id.fresh_footer_text);
-    			text.setText("Å¬Á¦¼ÓÔØÖĞ...");
+    			text.setText("åŠªåŠ›åŠ è½½ä¸­...");
     			
-    			//·ÃÎÊ·şÎñÆ÷½øĞĞÊı¾İµÄµ÷È¡
-    			//×¢Òâ£ºÈç¹ûÒÑ¾­ÊÇ×îºóÒ»Ò³£¬ÄÇÃ´FooterViewÓ¦¸ÃÏûÊ§£¬²¢ÇÒ²»ÔÙ½ÓÊÕ¹ö¶¯ÊÂ¼ş
+    			//è®¿é—®æœåŠ¡å™¨è¿›è¡Œæ•°æ®çš„è°ƒå–
+    			//æ³¨æ„ï¼šå¦‚æœå·²ç»æ˜¯æœ€åä¸€é¡µï¼Œé‚£ä¹ˆFooterViewåº”è¯¥æ¶ˆå¤±ï¼Œå¹¶ä¸”ä¸å†æ¥æ”¶æ»šåŠ¨äº‹ä»¶
     			ArrayList<Topic_Item> newDatas = new ArrayList<Topic_Item>();
     			for(int i=0 ; i<5; i++){
     				 Topic_Item item = new Topic_Item();
     			     item.setTopicIcon(R.drawable.list_topic_icon);
-    			     item.setTopicTitle("½ñÌìÎÒÒªÓÂ¸ÒÒ»´Î");
+    			     item.setTopicTitle("ä»Šå¤©æˆ‘è¦å‹‡æ•¢ä¸€æ¬¡");
     			     item.setTopicContentNumber(3020);
     			     item.setTopicUpdateNumber(16);
     			     newDatas.add(item);
