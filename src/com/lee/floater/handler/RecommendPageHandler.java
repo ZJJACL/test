@@ -37,13 +37,26 @@ public class RecommendPageHandler {
 	Context context;//灏哅ain浼犺繘鏉�
 	public View find_recommend_view; //鎺ㄨ崘椤甸潰鐨勪富View
 	public View find_recommend_page_head;//鎺ㄨ崘椤甸潰鐨勫ご閮╒iew(Banner/10鏉℃帹鑽愯瘽棰�)
+<<<<<<< HEAD
+=======
+	public int i=0;
+	public ViewPager bannerViewPager; // Banner鐨刅iewPager
+	public RecyclerView my_follow_topic_recyclerView;//鎴戝叧娉ㄧ殑璇濋鐨凴ecyclerView
+>>>>>>> refs/remotes/origin/master
 	
+<<<<<<< HEAD
 	public ViewPager bannerViewPager; // Banner鐨刅iewPager
 	public RecyclerView my_follow_topic_recyclerView;//鎴戝叧娉ㄧ殑璇濋鐨凴ecyclerView
 	
+=======
+>>>>>>> refs/remotes/origin/master
     //鎴戝叧娉ㄧ殑璇濋鏁版嵁List
     public ArrayList<Topic_Item> my_follow_topic_items = new ArrayList<Topic_Item>();
+<<<<<<< HEAD
     public String k=null;
+=======
+
+>>>>>>> refs/remotes/origin/master
     //搴曢儴鍒锋柊View绱㈠紩
     public View refresh_footer_view;
     
