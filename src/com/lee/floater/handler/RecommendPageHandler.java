@@ -27,35 +27,35 @@ import android.widget.TextView;
 
 /**
 <<<<<<< master
- * 集中处理首页_推荐页面中的事务
+ * 闆嗕腑澶勭悊棣栭〉_鎺ㄨ崘椤甸潰涓殑浜嬪姟
 =======
- * ���д�����ҳ_�Ƽ�ҳ���е�����
+ * 集中处理首页_推荐页面中的事务
 >>>>>>> 8fec199 li
  */
 public class RecommendPageHandler {
 	
-	Context context;//将Main传进来
-	public View find_recommend_view; //推荐页面的主View
-	public View find_recommend_page_head;//推荐页面的头部View(Banner/10条推荐话题)
+	Context context;//灏哅ain浼犺繘鏉�
+	public View find_recommend_view; //鎺ㄨ崘椤甸潰鐨勪富View
+	public View find_recommend_page_head;//鎺ㄨ崘椤甸潰鐨勫ご閮╒iew(Banner/10鏉℃帹鑽愯瘽棰�)
 	
-	public ViewPager bannerViewPager; // Banner的ViewPager
-	public RecyclerView my_follow_topic_recyclerView;//我关注的话题的RecyclerView
+	public ViewPager bannerViewPager; // Banner鐨刅iewPager
+	public RecyclerView my_follow_topic_recyclerView;//鎴戝叧娉ㄧ殑璇濋鐨凴ecyclerView
 	
-    //我关注的话题数据List
+    //鎴戝叧娉ㄧ殑璇濋鏁版嵁List
     public ArrayList<Topic_Item> my_follow_topic_items = new ArrayList<Topic_Item>();
-
-    //底部刷新View索引
+    public String k=null;
+    //搴曢儴鍒锋柊View绱㈠紩
     public View refresh_footer_view;
     
-    //下拉刷新条的索引
+    //涓嬫媺鍒锋柊鏉＄殑绱㈠紩
     SwipeRefreshLayout refresh_bar_for_recommend_page;
     
-    LinearLayoutManager linearLayoutManager;//关注的话题的RecyclerView的布局
+    LinearLayoutManager linearLayoutManager;//鍏虫敞鐨勮瘽棰樼殑RecyclerView鐨勫竷灞�
     
-	TopicListAdapter adapter; //关注的话题的RecyclerView的Adapter
+	TopicListAdapter adapter; //鍏虫敞鐨勮瘽棰樼殑RecyclerView鐨凙dapter
     
 	/**
-	 * 构造方法中将推荐页面View和Main传进来
+	 * 鏋勯�犳柟娉曚腑灏嗘帹鑽愰〉闈iew鍜孧ain浼犺繘鏉�
 	 */
 	public RecommendPageHandler(View find_recommend_view, Context context){
 		this.find_recommend_view = find_recommend_view ;
@@ -64,67 +64,67 @@ public class RecommendPageHandler {
 	}
 	
 	/**
-	 * 加载推荐页中的所有的View索引
+	 * 鍔犺浇鎺ㄨ崘椤典腑鐨勬墍鏈夌殑View绱㈠紩
 	 */
 	public void findAllViewById(){
 		
 		LayoutInflater inflater = LayoutInflater.from(context);
 		
-		//将推荐页面中的头部View装载为View
+		//灏嗘帹鑽愰〉闈腑鐨勫ご閮╒iew瑁呰浇涓篤iew
         find_recommend_page_head = 
         		inflater.inflate(R.layout.find_recommend_page_head,null);
         
-        //加载Banner的ViewPage
+        //鍔犺浇Banner鐨刅iewPage
         bannerViewPager=
         		(ViewPager)find_recommend_page_head.findViewById(R.id.banner_view_pager);
         
-     	//加载为我关注的话题编写的RecyclerView
+     	//鍔犺浇涓烘垜鍏虫敞鐨勮瘽棰樼紪鍐欑殑RecyclerView
         my_follow_topic_recyclerView =
         		(RecyclerView)find_recommend_view.findViewById(R.id.my_follow_topic_recyclerview);
         
-        //将列表尾部的加载更多的XML装载为View
+        //灏嗗垪琛ㄥ熬閮ㄧ殑鍔犺浇鏇村鐨刋ML瑁呰浇涓篤iew
         refresh_footer_view = inflater.inflate(R.layout.refresh_footer_view,null);
         
-       //加载推荐页面的刷新条SwipeRefreshLayout
+       //鍔犺浇鎺ㄨ崘椤甸潰鐨勫埛鏂版潯SwipeRefreshLayout
         refresh_bar_for_recommend_page = 
         		(SwipeRefreshLayout)find_recommend_view.findViewById(R.id.refresh_bar_for_recommend_page);  
-        //为这个刷新条添加滚动颜色
+        //涓鸿繖涓埛鏂版潯娣诲姞婊氬姩棰滆壊
         refresh_bar_for_recommend_page.setColorSchemeResources(R.color.color1, R.color.color2,R.color.color3, R.color.color4);
-        //为页面中的刷新控件添加监听器
+        //涓洪〉闈腑鐨勫埛鏂版帶浠舵坊鍔犵洃鍚櫒
         refresh_bar_for_recommend_page.setOnRefreshListener(new RecommendPageRefreshListener());
-        //为了实现下拉刷新，这里需要为页面的RecyclerView添加滚动事件监听器
+        //涓轰簡瀹炵幇涓嬫媺鍒锋柊锛岃繖閲岄渶瑕佷负椤甸潰鐨凴ecyclerView娣诲姞婊氬姩浜嬩欢鐩戝惉鍣�
         my_follow_topic_recyclerView.setOnScrollListener(new RecommendPageOnScrollListener());
 
 	}
 	
 	/**
-	 * 推荐页面中的数据加载、显示、刷新等所有事务的中继器
+	 * 鎺ㄨ崘椤甸潰涓殑鏁版嵁鍔犺浇銆佹樉绀恒�佸埛鏂扮瓑鎵�鏈変簨鍔＄殑涓户鍣�
 	 */
 	public void Handle (){
 		
-		//完成Banner的ViewPager的装载和显示
+		//瀹屾垚Banner鐨刅iewPager鐨勮杞藉拰鏄剧ず
         setBannerViewPager();
         
-      //加载每日话题推荐中的数据
+      //鍔犺浇姣忔棩璇濋鎺ㄨ崘涓殑鏁版嵁
         loadEverydayTopicItems();
         
-      //加载我关注的话题中的数据
+      //鍔犺浇鎴戝叧娉ㄧ殑璇濋涓殑鏁版嵁
         loadMyFollowTopicItems();
         
-        //将我关注的话题中的数据装载到RecycleView中
+        //灏嗘垜鍏虫敞鐨勮瘽棰樹腑鐨勬暟鎹杞藉埌RecycleView涓�
         setMyFollowTopicRecyclerView();
         
 	}
 	
 	/**
-	 * 完成BannerViewPager的装载,并为其设定监听器
+	 * 瀹屾垚BannerViewPager鐨勮杞�,骞朵负鍏惰瀹氱洃鍚櫒
 	 */
 	public void setBannerViewPager(){
 		List<View> list = new ArrayList<View>() ;
 		LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,  
 				                                  LinearLayout.LayoutParams.WRAP_CONTENT); 
 		
-		//预设为装载3张幻灯Banner，实际应该单独开辟一条线程从服务器调取图片
+		//棰勮涓鸿杞�3寮犲够鐏疊anner锛屽疄闄呭簲璇ュ崟鐙紑杈熶竴鏉＄嚎绋嬩粠鏈嶅姟鍣ㄨ皟鍙栧浘鐗�
 		for(int i =0 ; i<3 ; i ++){
              ImageView imageView = new ImageView(context) ;
              imageView.setLayoutParams(mParams);
@@ -133,13 +133,13 @@ public class RecommendPageHandler {
              list.add(imageView);
          }
 		
-		//为BannerViewPager创建适配器
+		//涓築annerViewPager鍒涘缓閫傞厤鍣�
 		ScreenPagerAdapter sPagerAdapter = new ScreenPagerAdapter(list);
 
-		//为ViewPager设置Adapter
+		//涓篤iewPager璁剧疆Adapter
 		bannerViewPager.setAdapter(sPagerAdapter);
 		
-		//为BannerViewPager设定监听器，以控制Banner_picker的滚动
+		//涓築annerViewPager璁惧畾鐩戝惉鍣紝浠ユ帶鍒禕anner_picker鐨勬粴鍔�
 		bannerViewPager.setOnPageChangeListener(new BannerListener(
 				(RotateImageView)find_recommend_page_head.findViewById(R.id.banner_picker),
 				(TextView)find_recommend_page_head.findViewById(R.id.banner_number)
@@ -147,11 +147,11 @@ public class RecommendPageHandler {
 	}
 	
 	/**
-	 * 从服务器端调取每日推荐的话题
-	 * 在实际运行的时候应该单独开辟一条线程进行加载
+	 * 浠庢湇鍔″櫒绔皟鍙栨瘡鏃ユ帹鑽愮殑璇濋
+	 * 鍦ㄥ疄闄呰繍琛岀殑鏃跺�欏簲璇ュ崟鐙紑杈熶竴鏉＄嚎绋嬭繘琛屽姞杞�
 	 */
 	public void loadEverydayTopicItems(){
-		//每日推荐10条
+		//姣忔棩鎺ㄨ崘10鏉�
 		RelativeLayout Item_1 = 
 				(RelativeLayout)find_recommend_page_head.findViewById(R.id.recommend_topic_1);
 		RelativeLayout Item_2 = 
@@ -186,22 +186,22 @@ public class RecommendPageHandler {
 		Item_List.add(Item_10);
 		for(int i=0 ; i<10;i++){
 			((ImageView)(Item_List.get(i).getChildAt(0))).setImageResource(R.drawable.list_topic_icon);
-			((TextView)(Item_List.get(i).getChildAt(1))).setText("我为室友来征婚");
-			((TextView)(Item_List.get(i).getChildAt(2))).setText("已制造208个卡片");
+			((TextView)(Item_List.get(i).getChildAt(1))).setText("鎴戜负瀹ゅ弸鏉ュ緛濠�");
+			((TextView)(Item_List.get(i).getChildAt(2))).setText("宸插埗閫�208涓崱鐗�");
 			((ImageView)(Item_List.get(i).getChildAt(3))).setImageResource(R.drawable.list_topic_category_video);
 		}
 	}
 	
 	/**
-	 * 从服务器端调取我关注的话题，装载到my_follow_topic_items这个List<Topic_Item>中
-	 * 在实际运行的时候应该单独开辟一条线程进行加载
+	 * 浠庢湇鍔″櫒绔皟鍙栨垜鍏虫敞鐨勮瘽棰橈紝瑁呰浇鍒癿y_follow_topic_items杩欎釜List<Topic_Item>涓�
+	 * 鍦ㄥ疄闄呰繍琛岀殑鏃跺�欏簲璇ュ崟鐙紑杈熶竴鏉＄嚎绋嬭繘琛屽姞杞�
 	 */
 	public void loadMyFollowTopicItems(){
-		//预设加载10条
+		//棰勮鍔犺浇10鏉�
 		for(int i=0 ; i<10; i++){
 			 Topic_Item item = new Topic_Item();
 		     item.setTopicIcon(R.drawable.list_topic_icon);
-		     item.setTopicTitle("校园中那些自带技能的B");
+		     item.setTopicTitle("鏍″洯涓偅浜涜嚜甯︽妧鑳界殑B");
 		     item.setTopicContentNumber(1024);
 		     item.setTopicUpdateNumber(35);
 		     my_follow_topic_items.add(item);
@@ -209,50 +209,50 @@ public class RecommendPageHandler {
 	}
 	
 	/**
-	 * 将我关注的话题中的数据装载到RecycleView中，并设定点击事件的监听器
+	 * 灏嗘垜鍏虫敞鐨勮瘽棰樹腑鐨勬暟鎹杞藉埌RecycleView涓紝骞惰瀹氱偣鍑讳簨浠剁殑鐩戝惉鍣�
 	 */
 	public void setMyFollowTopicRecyclerView(){
 
-        //默认动画效果
+        //榛樿鍔ㄧ敾鏁堟灉
 		my_follow_topic_recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //设置布局管理器，第三个参数为是否逆向布局
+        //璁剧疆甯冨眬绠＄悊鍣紝绗笁涓弬鏁颁负鏄惁閫嗗悜甯冨眬
 		linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
 		my_follow_topic_recyclerView.setLayoutManager(linearLayoutManager);
-        //可以提高效率
+        //鍙互鎻愰珮鏁堢巼
 		my_follow_topic_recyclerView.setHasFixedSize(true);
-		//新建适配器
+		//鏂板缓閫傞厤鍣�
         adapter = new TopicListAdapter();
        
         adapter.addDatas(my_follow_topic_items);
-        //加载头部
+        //鍔犺浇澶撮儴
         adapter.setHeaderView(find_recommend_page_head);
-        //加载尾部
+        //鍔犺浇灏鹃儴
         adapter.setFooterView(refresh_footer_view);
         
-        //设置适配器
+        //璁剧疆閫傞厤鍣�
         my_follow_topic_recyclerView.setAdapter(adapter);
-        //隐藏全屏的Loading
+        //闅愯棌鍏ㄥ睆鐨凩oading
         RelativeLayout loadingPage =( RelativeLayout)find_recommend_view.findViewById(R.id.loading_start_for_recommend_page);
         loadingPage.setVisibility(View.GONE);
         
-        //设置监听器,当话题列表中的某一项被单击的时候回调
+        //璁剧疆鐩戝惉鍣�,褰撹瘽棰樺垪琛ㄤ腑鐨勬煇涓�椤硅鍗曞嚮鐨勬椂鍊欏洖璋�
         adapter.setOnItemClickListener(new TopicListItemListener(context));
     }
 	
 	  /**
-     * 推荐页面中的下拉刷新监听器
+     * 鎺ㄨ崘椤甸潰涓殑涓嬫媺鍒锋柊鐩戝惉鍣�
      */
     class RecommendPageRefreshListener implements OnRefreshListener{
 
     	@Override
     	public void onRefresh() {
     		
-    		//这里主要是对关注的话题列表的更新
+    		//杩欓噷涓昏鏄鍏虫敞鐨勮瘽棰樺垪琛ㄧ殑鏇存柊
     		ArrayList<Topic_Item> newDatas = new ArrayList<Topic_Item>();
 			for(int i=0 ; i<5; i++){
 				 Topic_Item item = new Topic_Item();
 			     item.setTopicIcon(R.drawable.list_topic_icon);
-			     item.setTopicTitle("我从来没有说过的秘密");
+			     item.setTopicTitle("鎴戜粠鏉ユ病鏈夎杩囩殑绉樺瘑");
 			     item.setTopicContentNumber(389);
 			     item.setTopicUpdateNumber(8);
 			     newDatas.add(item);
@@ -266,7 +266,7 @@ public class RecommendPageHandler {
     
     
     /**
-     * 推荐页面中的加载更多刷新监听器
+     * 鎺ㄨ崘椤甸潰涓殑鍔犺浇鏇村鍒锋柊鐩戝惉鍣�
      */
     class RecommendPageOnScrollListener extends RecyclerView.OnScrollListener{
 
@@ -279,15 +279,15 @@ public class RecommendPageHandler {
     		if (newState ==RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {  
 
     			TextView text = (TextView)refresh_footer_view.findViewById(R.id.fresh_footer_text);
-    			text.setText("努力加载中...");
+    			text.setText("鍔姏鍔犺浇涓�...");
     			
-    			//访问服务器进行数据的调取
-    			//注意：如果已经是最后一页，那么FooterView应该消失，并且不再接收滚动事件
+    			//璁块棶鏈嶅姟鍣ㄨ繘琛屾暟鎹殑璋冨彇
+    			//娉ㄦ剰锛氬鏋滃凡缁忔槸鏈�鍚庝竴椤碉紝閭ｄ箞FooterView搴旇娑堝け锛屽苟涓斾笉鍐嶆帴鏀舵粴鍔ㄤ簨浠�
     			ArrayList<Topic_Item> newDatas = new ArrayList<Topic_Item>();
     			for(int i=0 ; i<5; i++){
     				 Topic_Item item = new Topic_Item();
     			     item.setTopicIcon(R.drawable.list_topic_icon);
-    			     item.setTopicTitle("今天我要勇敢一次");
+    			     item.setTopicTitle("浠婂ぉ鎴戣鍕囨暍涓�娆�");
     			     item.setTopicContentNumber(3020);
     			     item.setTopicUpdateNumber(16);
     			     newDatas.add(item);
