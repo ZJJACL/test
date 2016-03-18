@@ -8,5 +8,9 @@ public class my {
     	
        System.out.println();
     }
+    public void mytest(){
+    	
+    	
+    }
 
 }
