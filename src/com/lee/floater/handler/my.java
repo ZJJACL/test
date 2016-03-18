@@ -3,8 +3,8 @@ package com.lee.floater.handler;
 public class my {
 
    public int i=0;
-
-    public void t(){
+  public char h='j';
+  public void t(){
     	
     	
     }
