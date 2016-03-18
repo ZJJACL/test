@@ -37,26 +37,21 @@ public class RecommendPageHandler {
 	Context context;//灏哅ain浼犺繘鏉�
 	public View find_recommend_view; //鎺ㄨ崘椤甸潰鐨勪富View
 	public View find_recommend_page_head;//鎺ㄨ崘椤甸潰鐨勫ご閮╒iew(Banner/10鏉℃帹鑽愯瘽棰�)
-<<<<<<< HEAD
-=======
+
 	public int i=0;
-	public ViewPager bannerViewPager; // Banner鐨刅iewPager
-	public RecyclerView my_follow_topic_recyclerView;//鎴戝叧娉ㄧ殑璇濋鐨凴ecyclerView
->>>>>>> refs/remotes/origin/master
-	
-<<<<<<< HEAD
+	public ViewPager bannerViewPager1; // Banner鐨刅iewPager
+	public RecyclerView my_follow_topic_recyclerView1;//鎴戝叧娉ㄧ殑璇濋鐨凴ecyclerView
+
 	public ViewPager bannerViewPager; // Banner鐨刅iewPager
 	public RecyclerView my_follow_topic_recyclerView;//鎴戝叧娉ㄧ殑璇濋鐨凴ecyclerView
 	
-=======
->>>>>>> refs/remotes/origin/master
+
     //鎴戝叧娉ㄧ殑璇濋鏁版嵁List
     public ArrayList<Topic_Item> my_follow_topic_items = new ArrayList<Topic_Item>();
-<<<<<<< HEAD
-    public String k=null;
-=======
 
->>>>>>> refs/remotes/origin/master
+    public String k=null;
+
+
     //搴曢儴鍒锋柊View绱㈠紩
     public View refresh_footer_view;
     
@@ -88,11 +83,11 @@ public class RecommendPageHandler {
         		inflater.inflate(R.layout.find_recommend_page_head,null);
         
         //鍔犺浇Banner鐨刅iewPage
-        bannerViewPager=
+        bannerViewPager1=
         		(ViewPager)find_recommend_page_head.findViewById(R.id.banner_view_pager);
         
      	//鍔犺浇涓烘垜鍏虫敞鐨勮瘽棰樼紪鍐欑殑RecyclerView
-        my_follow_topic_recyclerView =
+        my_follow_topic_recyclerView1 =
         		(RecyclerView)find_recommend_view.findViewById(R.id.my_follow_topic_recyclerview);
         
         //灏嗗垪琛ㄥ熬閮ㄧ殑鍔犺浇鏇村鐨刋ML瑁呰浇涓篤iew
@@ -106,7 +101,7 @@ public class RecommendPageHandler {
         //涓洪〉闈腑鐨勫埛鏂版帶浠舵坊鍔犵洃鍚櫒
         refresh_bar_for_recommend_page.setOnRefreshListener(new RecommendPageRefreshListener());
         //涓轰簡瀹炵幇涓嬫媺鍒锋柊锛岃繖閲岄渶瑕佷负椤甸潰鐨凴ecyclerView娣诲姞婊氬姩浜嬩欢鐩戝惉鍣�
-        my_follow_topic_recyclerView.setOnScrollListener(new RecommendPageOnScrollListener());
+        my_follow_topic_recyclerView1.setOnScrollListener(new RecommendPageOnScrollListener());
 
 	}
 	
@@ -150,10 +145,10 @@ public class RecommendPageHandler {
 		ScreenPagerAdapter sPagerAdapter = new ScreenPagerAdapter(list);
 
 		//涓篤iewPager璁剧疆Adapter
-		bannerViewPager.setAdapter(sPagerAdapter);
+		bannerViewPager1.setAdapter(sPagerAdapter);
 		
 		//涓築annerViewPager璁惧畾鐩戝惉鍣紝浠ユ帶鍒禕anner_picker鐨勬粴鍔�
-		bannerViewPager.setOnPageChangeListener(new BannerListener(
+		bannerViewPager1.setOnPageChangeListener(new BannerListener(
 				(RotateImageView)find_recommend_page_head.findViewById(R.id.banner_picker),
 				(TextView)find_recommend_page_head.findViewById(R.id.banner_number)
 				));
@@ -227,12 +222,12 @@ public class RecommendPageHandler {
 	public void setMyFollowTopicRecyclerView(){
 
         //榛樿鍔ㄧ敾鏁堟灉
-		my_follow_topic_recyclerView.setItemAnimator(new DefaultItemAnimator());
+		my_follow_topic_recyclerView1.setItemAnimator(new DefaultItemAnimator());
         //璁剧疆甯冨眬绠＄悊鍣紝绗笁涓弬鏁颁负鏄惁閫嗗悜甯冨眬
 		linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-		my_follow_topic_recyclerView.setLayoutManager(linearLayoutManager);
+		my_follow_topic_recyclerView1.setLayoutManager(linearLayoutManager);
         //鍙互鎻愰珮鏁堢巼
-		my_follow_topic_recyclerView.setHasFixedSize(true);
+		my_follow_topic_recyclerView1.setHasFixedSize(true);
 		//鏂板缓閫傞厤鍣�
         adapter = new TopicListAdapter();
        
@@ -243,7 +238,7 @@ public class RecommendPageHandler {
         adapter.setFooterView(refresh_footer_view);
         
         //璁剧疆閫傞厤鍣�
-        my_follow_topic_recyclerView.setAdapter(adapter);
+        my_follow_topic_recyclerView1.setAdapter(adapter);
         //闅愯棌鍏ㄥ睆鐨凩oading
         RelativeLayout loadingPage =( RelativeLayout)find_recommend_view.findViewById(R.id.loading_start_for_recommend_page);
         loadingPage.setVisibility(View.GONE);
