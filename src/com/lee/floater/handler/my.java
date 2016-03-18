@@ -6,7 +6,7 @@ public class my {
     public String k=null;
     public void t(){
     	
-    	
+       System.out.println();
     }
 
 }
